@@ -5,4 +5,7 @@ from django.shortcuts import render
 
 
 def home(request):
-    return render(request, 'landing/landing.html')
+    return render(request, 'landing/landing.html', {
+        "name":"Javier.",
+        "age":41,
+    })
