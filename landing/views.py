@@ -1,4 +1,4 @@
-# from django.http import HttpResponse
+from django.http import HttpResponse
 from django.shortcuts import render
 from datetime import date
 
@@ -6,9 +6,33 @@ from datetime import date
 
 
 def home(request):
-    today=date.today()
+    today = date.today()
+    stack = [
+        {
+            'id': 'python',
+            'name': 'Python'
+        },
+        {
+            'id': 'django',
+            'name': 'Django'
+        },
+        {
+            'id': 'golang',
+            'name': 'Golang'
+        },
+        {
+            'id': 'js',
+            'name': 'JS'
+        },
+    ]
+    # stack = [] #
     return render(request, 'landing/landing.html', {
-        "name":"Javier.",
-        "today":today,
-        "age":41,
+        "name": "Daniel",
+        "today": today,
+        "age": 12,
+        "stack": stack,
     })
+
+
+def stack_detail(request, tool):
+    return HttpResponse(f"Tecnologia: {tool}")
