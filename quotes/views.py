@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect, Http404
 from django.urls import reverse
 
 # Create your views here.
@@ -33,5 +33,7 @@ def days_week(request, day):
     try:
         quote_text = days_of_week[day]
         return HttpResponse(quote_text)
-    except Exception:  # o KeyError
-        return HttpResponseNotFound(f'{day}: No es valido <a href="#" onclick="history.back();">Regresar atrás</a>')
+    except KeyError:
+        # return HttpResponseNotFound("Este día no existe.")
+        # return render(request, '404.html')
+        raise Http404()
