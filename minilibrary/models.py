@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth import get_user_model
 # Create your models here.
 
-
 class Author(models.Model):
     name = models.CharField(max_length=100)
     birth_date = models.DateField(null=True, blank=True)
@@ -13,6 +12,9 @@ class Author(models.Model):
 
 class Genre(models.Model):
     name = models.CharField(max_length=50, unique=True)
+    
+    def __str__(self):
+        return self.name
 
 
 class Book(models.Model):
@@ -25,6 +27,10 @@ class Book(models.Model):
     genres = models.ManyToManyField(Genre, related_name='books')
     recommended_by = models.ManyToManyField(
         get_user_model(), through="Recommendation", related_name="recommendations")
+
+    class Meta:
+        verbose_name="Libro"
+        verbose_name_plural="Libros"
 
     def __str__(self):
         return self.title
